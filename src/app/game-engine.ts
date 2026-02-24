@@ -45,7 +45,6 @@ export class GameEngine {
       }
     }
     this.#grid.set(nextGrid);
-    console.log('Grid updated, currently alive cells:', nextGrid.flat().filter(cell => cell).length);
   }
 
   private wilBeAlive(grid: boolean[][], row: number, col: number): boolean {
