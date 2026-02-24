@@ -52,6 +52,7 @@ export class App {
   }
 
   protected toggleCell(row: number, col: number) {
+    if (this.gameEngine.running()) return;
     this.initialGrid.set(
       updateCell(this.initialGrid(), row, col, !this.initialGrid()[row].cells[col].alive),
     );

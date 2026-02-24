@@ -11,6 +11,11 @@ table {
   border-collapse: collapse;
   border: 1px solid black;
   height: calc(100vh - 80px);
+  cursor: pointer;
+}
+
+.running {
+  cursor: not-allowed;
 }
 
 tr {
