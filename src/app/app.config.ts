@@ -1,18 +1,12 @@
 import { ApplicationConfig, provideBrowserGlobalErrorListeners } from '@angular/core';
 
-export interface ClientConfig {
-  speed: number;
-  initialColumns: number;
-  initialRows: number;
-  preserveGridOnStop: boolean;
-}
-
-export const appConfig: ApplicationConfig & { client: ClientConfig } = {
+export const appConfig: ApplicationConfig = {
   providers: [provideBrowserGlobalErrorListeners()],
-  client: {
-    speed: 100,
-    initialColumns: 10,
-    initialRows: 10,
-    preserveGridOnStop: true,
-  },
+};
+
+export const clientConfig = {
+  speed: 100,
+  initialColumns: 10,
+  initialRows: 10,
+  preserveGridOnStop: true,
 };

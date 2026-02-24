@@ -4,7 +4,7 @@ import { MatInputModule } from '@angular/material/input';
 import { MatButtonModule } from '@angular/material/button';
 import { fromBoolArray, Grid, initialize, toBoolArray, updateCell } from './grid';
 import { FormsModule } from '@angular/forms';
-import { appConfig } from './app.config';
+import { clientConfig } from './app.config';
 
 @Component({
   selector: 'app-root',
@@ -14,8 +14,8 @@ import { appConfig } from './app.config';
 })
 export class App {
   private readonly gameEngine = inject(GameEngine);
-  protected readonly rows = signal(appConfig.client.initialRows);
-  protected readonly cols = signal(appConfig.client.initialColumns);
+  protected readonly rows = signal(clientConfig.initialRows);
+  protected readonly cols = signal(clientConfig.initialColumns);
   protected readonly canStart = computed(
     () => this.rows() > 0 && this.cols() > 0 && !this.gameEngine.running(),
   );
@@ -42,12 +42,12 @@ export class App {
   protected start() {
     if (!this.canStart()) return;
     this.gameEngine.initialize(this.rows(), this.cols(), toBoolArray(this.initialGrid()));
-    this.gameEngine.run(appConfig.client.speed);
+    this.gameEngine.run(clientConfig.speed);
   }
 
   protected stop() {
     this.gameEngine.stop();
-    if (appConfig.client.preserveGridOnStop)
+    if (clientConfig.preserveGridOnStop)
       this.initialGrid.set(fromBoolArray(this.gameEngine.grid()));
   }
 
