@@ -1,24 +1,40 @@
 <form>
   <mat-form-field>
     <mat-label>Rows</mat-label>
-    <input matInput placeholder="Rows" type="number" name="rows" [value]="rows()"
-      (change)="updateRows($event.target.value)">
+    <input
+      matInput
+      placeholder="Rows"
+      type="number"
+      name="rows"
+      [value]="rows()"
+      (change)="updateRows($event.target.value)"
+    />
   </mat-form-field>
   <mat-form-field>
     <mat-label>Cols</mat-label>
-    <input matInput placeholder="Cols" type="number" name="cols" [value]="cols()"
-      (change)="updateCols($event.target.value)">
+    <input
+      matInput
+      placeholder="Cols"
+      type="number"
+      name="cols"
+      [value]="cols()"
+      (change)="updateCols($event.target.value)"
+    />
   </mat-form-field>
   <button matButton="elevated" (click)="start()" [disabled]="!canStart()">Start</button>
   <button matButton="elevated" (click)="stop()" [disabled]="!canStop()">Stop</button>
 </form>
 
 <table class="gameTable">
-  @for(row of grid(); track row.id) {
-  <tr>
-    @for(cell of row.cells; track cell.id) {
-    <td [class.alive]="cell.alive" [class.dead]="!cell.alive" (click)="toggleCell(row.id, cell.id)"></td>
-    }
-  </tr>
+  @for (row of grid(); track row.id) {
+    <tr>
+      @for (cell of row.cells; track cell.id) {
+        <td
+          [class.alive]="cell.alive"
+          [class.dead]="!cell.alive"
+          (click)="toggleCell(row.id, cell.id)"
+        ></td>
+      }
+    </tr>
   }
 </table>

@@ -10,16 +10,20 @@ import { appConfig } from './app.config';
   selector: 'app-root',
   imports: [MatInputModule, MatButtonModule, FormsModule],
   templateUrl: './app.html',
-  styleUrl: './app.css'
+  styleUrl: './app.css',
 })
 export class App {
   private readonly gameEngine = inject(GameEngine);
   protected readonly rows = signal(appConfig.client.initialRows);
   protected readonly cols = signal(appConfig.client.initialColumns);
-  protected readonly canStart = computed(() => this.rows() > 0 && this.cols() > 0 && !this.gameEngine.running());
+  protected readonly canStart = computed(
+    () => this.rows() > 0 && this.cols() > 0 && !this.gameEngine.running(),
+  );
   protected readonly canStop = this.gameEngine.running;
   protected readonly initialGrid = signal<Grid>(initialize(this.rows(), this.cols()));
-  protected readonly grid = computed(() => this.gameEngine.running() ? fromBoolArray(this.gameEngine.grid()) : this.initialGrid());
+  protected readonly grid = computed(() =>
+    this.gameEngine.running() ? fromBoolArray(this.gameEngine.grid()) : this.initialGrid(),
+  );
 
   protected updateRows(value: string) {
     let rows = parseInt(value, 10);
@@ -43,10 +47,13 @@ export class App {
 
   protected stop() {
     this.gameEngine.stop();
-    if (appConfig.client.preserveGridOnStop) this.initialGrid.set(fromBoolArray(this.gameEngine.grid()));
+    if (appConfig.client.preserveGridOnStop)
+      this.initialGrid.set(fromBoolArray(this.gameEngine.grid()));
   }
 
   protected toggleCell(row: number, col: number) {
-    this.initialGrid.set(updateCell(this.initialGrid(), row, col, !this.initialGrid()[row].cells[col].alive));
+    this.initialGrid.set(
+      updateCell(this.initialGrid(), row, col, !this.initialGrid()[row].cells[col].alive),
+    );
   }
 }

@@ -19,10 +19,10 @@ export class GameEngine {
     this.#rows.set(rows);
     this.#cols.set(cols);
     //Create a deep copy of the initial state to avoid mutating the original array
-    this.#grid.set(initialState.map(row => [...row]));
+    this.#grid.set(initialState.map((row) => [...row]));
   }
 
-  public run(speed: number = 100) {
+  public run(speed = 100) {
     this.#intervalId = setInterval(() => {
       this.update();
     }, speed);
@@ -38,7 +38,9 @@ export class GameEngine {
 
   private update() {
     const currentGrid = this.#grid();
-    const nextGrid = Array.from({ length: this.rows() }, () => Array<boolean>(this.cols()).fill(false));
+    const nextGrid = Array.from({ length: this.rows() }, () =>
+      Array<boolean>(this.cols()).fill(false),
+    );
     for (let row = 0; row < this.rows(); row++) {
       for (let col = 0; col < this.cols(); col++) {
         nextGrid[row][col] = this.wilBeAlive(currentGrid, row, col);
@@ -49,7 +51,7 @@ export class GameEngine {
 
   private wilBeAlive(grid: boolean[][], row: number, col: number): boolean {
     const wasAlive = grid[row][col];
-    let livingNeighbors = this.countLivingNeighbors(grid, row, col);
+    const livingNeighbors = this.countLivingNeighbors(grid, row, col);
     return livingNeighbors === 3 || (wasAlive && livingNeighbors === 2);
   }
 

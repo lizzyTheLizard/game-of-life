@@ -7,17 +7,12 @@ export interface ClientConfig {
   preserveGridOnStop: boolean;
 }
 
-
 export const appConfig: ApplicationConfig & { client: ClientConfig } = {
-  providers: [
-    provideBrowserGlobalErrorListeners(),
-  ],
+  providers: [provideBrowserGlobalErrorListeners()],
   client: {
     speed: 100,
     initialColumns: 10,
     initialRows: 10,
-    preserveGridOnStop: true
-  }
+    preserveGridOnStop: true,
+  },
 };
-
-
